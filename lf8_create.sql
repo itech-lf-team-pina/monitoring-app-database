@@ -1,3 +1,5 @@
+create database IF NOT EXISTS lf8_test;
+use lf8_test;
 create table if not exists hardware_type
 (
     id   int auto_increment
@@ -34,5 +36,4 @@ create table if not exists log_type
     name text not null
 )
     comment 'Typ des Logeintrags';
-
 
