@@ -12,12 +12,21 @@ create table if not exists hardware
 (
     id            int auto_increment
         primary key,
-    value         int null,
-    hardware_type int null,
+    value_int     float                                 null,
+    value_string  text                                  null,
+    hardware_type int                                   not null,
+    timestamp     timestamp default current_timestamp() null,
     constraint hardware_hardware_type_fk
         foreign key (hardware_type) references hardware_type (id)
 )
     comment 'Tabelle für Messdaten';
+
+create table if not exists limit_type
+(
+    id   int auto_increment
+        primary key,
+    name text null
+);
 
 create table if not exists log
 (
@@ -36,4 +45,20 @@ create table if not exists log_type
     name text not null
 )
     comment 'Typ des Logeintrags';
+
+create table if not exists threshold
+(
+    id            int auto_increment
+        primary key,
+    value       float                                 null comment 'Soft Limit in Prozent',
+    hardware_type int                                   null,
+    limit_type    int                                   null,
+    timestamp     timestamp default current_timestamp() null,
+    constraint threshold_hardware_type_id_fk
+        foreign key (hardware_type) references hardware_type (id),
+    constraint threshold_limit_type_id_fk
+        foreign key (limit_type) references limit_type (id)
+);
+
+
 
