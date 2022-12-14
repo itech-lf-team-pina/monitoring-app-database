@@ -1,3 +1,4 @@
+drop DATABASE lf8_test;
 create database IF NOT EXISTS lf8_test;
 use lf8_test;
 create table if not exists hardware_type
@@ -61,4 +62,18 @@ create table if not exists threshold
 );
 
 
+INSERT INTO lf8_test.hardware_type (id, name) VALUES (1, 'CPU count');
+INSERT INTO lf8_test.hardware_type (id, name) VALUES (2, 'CPU utilization');
+INSERT INTO lf8_test.hardware_type (id, name) VALUES (3, 'RAM available');
+INSERT INTO lf8_test.hardware_type (id, name) VALUES (4, 'RAM used (percent)');
+INSERT INTO lf8_test.hardware_type (id, name) VALUES (5, 'RAM used (absolute)');
+INSERT INTO lf8_test.hardware_type (id, name) VALUES (6, 'Free disk space');
+INSERT INTO lf8_test.hardware_type (id, name) VALUES (7, 'Used disk space (percent)');
+INSERT INTO lf8_test.hardware_type (id, name) VALUES (8, 'Users');
 
+INSERT INTO lf8_test.log_type (id, name) VALUES (1, 'Hardware');
+INSERT INTO lf8_test.log_type (id, name) VALUES (2, 'Webserver Access');
+INSERT INTO lf8_test.log_type (id, name) VALUES (3, 'Webserver Error Log');
+
+INSERT INTO lf8_test.limit_type (id, name) VALUES (1, 'Soft Limit');
+INSERT INTO lf8_test.limit_type (id, name) VALUES (2, 'Hard Limit');
