@@ -29,16 +29,6 @@ create table if not exists limit_type
     name text null
 );
 
-create table if not exists log
-(
-    id        bigint unsigned auto_increment
-        primary key,
-    log       text                                  not null,
-    timestamp timestamp default current_timestamp() not null,
-    constraint id
-        unique (id)
-);
-
 create table if not exists log_type
 (
     id   int auto_increment
@@ -47,11 +37,24 @@ create table if not exists log_type
 )
     comment 'Typ des Logeintrags';
 
+create table if not exists log
+(
+    id        bigint unsigned auto_increment
+        primary key,
+    log       text                                  not null,
+    timestamp timestamp default current_timestamp() not null,
+    log_type  int                                   not null,
+    constraint id
+        unique (id),
+    constraint log_log_type_id_fk
+        foreign key (log_type) references log_type (id)
+);
+
 create table if not exists threshold
 (
     id            int auto_increment
         primary key,
-    value       float                                 null comment 'Soft Limit in Prozent',
+    value         float                                 null comment 'Soft Limit in Prozent',
     hardware_type int                                   null,
     limit_type    int                                   null,
     timestamp     timestamp default current_timestamp() null,
@@ -71,9 +74,9 @@ INSERT INTO app.hardware_type (id, name) VALUES (6, 'Free disk space');
 INSERT INTO app.hardware_type (id, name) VALUES (7, 'Used disk space (percent)');
 INSERT INTO app.hardware_type (id, name) VALUES (8, 'Users');
 
-INSERT INTO app.log_type (id, name) VALUES (1, 'Hardware');
-INSERT INTO app.log_type (id, name) VALUES (2, 'Webserver Access');
-INSERT INTO app.log_type (id, name) VALUES (3, 'Webserver Error Log');
+INSERT INTO app.log_type (id, name) VALUES (1, 'Critical: Hardware');
+INSERT INTO app.log_type (id, name) VALUES (2, 'Warning: Hardware');
+INSERT INTO app.log_type (id, name) VALUES (3, 'Webserver Access');
 
 INSERT INTO app.limit_type (id, name) VALUES (1, 'Soft Limit');
 INSERT INTO app.limit_type (id, name) VALUES (2, 'Hard Limit');
