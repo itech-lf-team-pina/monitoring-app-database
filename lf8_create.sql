@@ -80,3 +80,8 @@ INSERT INTO lf8_test.log_type (id, name) VALUES (3, 'Webserver Access');
 
 INSERT INTO lf8_test.limit_type (id, name) VALUES (1, 'Soft Limit');
 INSERT INTO lf8_test.limit_type (id, name) VALUES (2, 'Hard Limit');
+
+INSERT INTO lf8_test.threshold (id, value, hardware_type, limit_type, timestamp) VALUES (1, 50, 4, 1, '2022-12-17 17:15:59');
+INSERT INTO lf8_test.threshold (id, value, hardware_type, limit_type, timestamp) VALUES (2, 12, 4, 2, '2022-12-17 17:15:59');
+INSERT INTO lf8_test.threshold (id, value, hardware_type, limit_type, timestamp) VALUES (3, 50, 2, 1, '2022-12-17 17:15:59');
+INSERT INTO lf8_test.threshold (id, value, hardware_type, limit_type, timestamp) VALUES (4, 5, 2, 2, '2022-12-17 17:15:59');
